@@ -21,7 +21,7 @@ export function rsi(values:number[], period=14) {
 export function atr(candles:Candle[], period=14) {
   if(candles.length<2) return 0;
   const trs:number[]=[];
-  for(let i=1;i<candles.length;i++) trs.push(Math.max(candles[i].high-candles[i-1].close, candles[i].high-candles[i].low, Math.abs(candles[i].low-candles[i-1].close)));
+  for(let i=1;i<candles.length;i++) trs.push(Math.max(candles[i].high-candles[i].low, Math.abs(candles[i].high-candles[i-1].close), Math.abs(candles[i].low-candles[i-1].close)));
   const slice=trs.slice(-period);
   return slice.reduce((a,b)=>a+b,0)/(slice.length||1);
 }
